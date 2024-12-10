@@ -11,6 +11,9 @@ describe('Login Test Suite', () => {
         });
 
     });
+
+    //dawgshi
+    
     
 
     // Define reusable variables
@@ -36,7 +39,7 @@ describe('Login Test Suite', () => {
     beforeEach(() => {
         cy.visit(url);
 
-        cy.wait(1000);
+        cy.wait(2000);
 
         // Close the welcome pop-up
         cy.get(selectors.closeDialog).should('be.visible').click();
