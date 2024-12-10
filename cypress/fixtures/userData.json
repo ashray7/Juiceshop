@@ -1,0 +1,11 @@
+{
+  "email": "ashraybaral777@gmail.com",
+  "password": "password",
+  "securityAnswer": "nepal",
+  "invalidEmail": "invalidemail.com",
+  "invalidEmailErrorMessage": "Email address is not valid.",
+  "invalidPassword": "invalidpassword",
+  "newUsername": "ashray777",
+  "invalidCredentialsError": "Invalid email or password."
+  
+}
