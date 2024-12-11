@@ -55,9 +55,4 @@ describe('Login Test Suite', () => {
         });
     })
 
-    // it('Invalid data login', () => {
-    //     login(userData.invalidEmail, userData.invalidPassword);
-    //     cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
-    // });
-
 });
