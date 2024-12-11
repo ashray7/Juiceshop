@@ -39,7 +39,7 @@ describe('Login Test Suite', () => {
     beforeEach(() => {
         cy.visit(url);
 
-        cy.wait(3000);
+        cy.wait(1000);
 
         // Close the welcome pop-up
         cy.get(selectors.closeDialog).should('be.visible').click();
