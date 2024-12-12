@@ -6,7 +6,7 @@ describe('Signup Test Suite', () => {
 
     before(() => {
         cy.fixture('userData').then((data) => {
-            data.email = "ashraybaral1@gmail.com";
+            data.email = "ashraybaral2@gmail.com";
             // data.email = "ashraybaral" + Math.floor(Math.random() * 1000) + "@gmail.com";
             userData = data;  // Store the loaded data into userData
         });
