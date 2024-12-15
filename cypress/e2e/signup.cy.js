@@ -6,7 +6,7 @@ describe('Signup Test Suite', () => {
 
     before(() => {
         cy.fixture('userData').then((data) => {
-            data.email = "ashraybaral2@gmail.com";
+            data.email = "ashraybaral13@gmail.com";
             // data.email = "ashraybaral" + Math.floor(Math.random() * 1000) + "@gmail.com";
             userData = data;  // Store the loaded data into userData
         });
@@ -14,6 +14,8 @@ describe('Signup Test Suite', () => {
 
     // Define reusable variables
     const url = 'https://juice-shop.herokuapp.com/#/';
+    // const url = 'https://juice-shop.herokuapp.com/#/register';
+    //https://juice-shop.herokuapp.com/#/register
     const selectors = {
         closeDialog: '.close-dialog',
         cookieConsentButton: '.cc-btn',
@@ -26,8 +28,10 @@ describe('Signup Test Suite', () => {
         securityAnswerInput: '#securityAnswerControl',
         selectRoleDropdown: '.mat-select-arrow-wrapper',
         selectRoleOption: '#mat-option-5 > .mat-option-text',
+        // selectRoleOption: '#mat-option-1 > .mat-option-text',
         registerButton: '#registerButton',
         errorMessage: '#mat-error-7',
+        weakPasswordErrorMessage: '#mat-error-9',
         snackBarMessage: '.mat-simple-snack-bar-content',
     };
 
@@ -78,11 +82,23 @@ describe('Signup Test Suite', () => {
             // Verify error message for invalid email
             cy.get(selectors.errorMessage).should('contain', userData.invalidEmailErrorMessage);
         });
+        it('Empty email and password', () => {
+            signup(" ", " ", userData.securityAnswer);
+    
+            // Verify error message for invalid email
+            cy.get(selectors.errorMessage).should('contain', userData.invalidEmailErrorMessage);
+        });
+        it('Weak password', () => {
+            signup(userData.email, userData.weakPassword, userData.securityAnswer);
+    
+            // Verify error message for weak password
+            cy.get(selectors.weakPasswordErrorMessage).should('contain', userData.weakPasswordErrorMessage);
+        });
         it('Shows duplicate email error', () => {
             signup(userData.email, userData.password, userData.securityAnswer);
             cy.get(selectors.registerButton).click();
     
-            // Verify error message for invalid email
+            // Verify error message for email not unique
             // cy.get(selectors.errorMessage).should('contain', userData.invalidEmailErrorMessage);
             cy.get('.error').should('contain', 'Email must be unique');
         });

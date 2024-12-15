@@ -6,6 +6,8 @@
   "invalidEmailErrorMessage": "Email address is not valid.",
   "invalidPassword": "invalidpassword",
   "newUsername": "ashray777",
-  "invalidCredentialsError": "Invalid email or password."
+  "invalidCredentialsError": "Invalid email or password.",
+  "weakPassword": "pass",
+  "weakPasswordErrorMessage": "Password must be 5-40 characters long."
   
 }

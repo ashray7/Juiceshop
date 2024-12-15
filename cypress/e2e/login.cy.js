@@ -53,6 +53,14 @@ describe('Login Test Suite', () => {
             login(' ', ' ');
             cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
         });
+        it('Empty email', () => {
+            login(' ', userData.password);
+            cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
+        });
+        it('Empty password', () => {
+            login(userData.email, ' ');
+            cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
+        });
     })
 
 });
