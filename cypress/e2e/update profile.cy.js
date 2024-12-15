@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import * as utils from '../support/utils';
 
 describe('Update Username Test Suite', () => {
 
@@ -26,13 +27,13 @@ describe('Update Username Test Suite', () => {
     };
 
     // Reusable login function
-    const login = (email, password) => {
-        cy.get(selectors.navbarAccount).click();
-        cy.get(selectors.navbarLoginButton).click();
-        cy.get(selectors.emailInput).type(email);
-        cy.get(selectors.passwordInput).type(password);
-        cy.get(selectors.loginButton).click();
-    };
+    // const login = (email, password) => {
+    //     cy.get(selectors.navbarAccount).click();
+    //     cy.get(selectors.navbarLoginButton).click();
+    //     cy.get(selectors.emailInput).type(email);
+    //     cy.get(selectors.passwordInput).type(password);
+    //     cy.get(selectors.loginButton).click();
+    // };
 
     // Hook to run before each test case
     beforeEach(() => {
@@ -48,7 +49,7 @@ describe('Update Username Test Suite', () => {
 
     it('Update username', () => {
         // Login with valid credentials
-        login(userData.email, userData.password);
+        utils.login(selectors,userData.email, userData.password);
 
         // Navigate to the user profile page
         cy.get(selectors.navbarAccount).click();

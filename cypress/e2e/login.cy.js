@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import * as utils from '../support/utils';
 
 describe('Login Test Suite', () => {
 
@@ -24,13 +25,13 @@ describe('Login Test Suite', () => {
     };
 
     // Reusable login function
-    const login = (email, password) => {
-        cy.get(selectors.navbarAccount).click();
-        cy.get(selectors.navbarLoginButton).click();
-        cy.get(selectors.emailInput).type(email, { delay: 100 });
-        cy.get(selectors.passwordInput).type(password);
-        cy.get(selectors.loginButton).click();
-    };
+    // const login = (email, password) => {
+    //     cy.get(selectors.navbarAccount).click();
+    //     cy.get(selectors.navbarLoginButton).click();
+    //     cy.get(selectors.emailInput).type(email, { delay: 100 });
+    //     cy.get(selectors.passwordInput).type(password);
+    //     cy.get(selectors.loginButton).click();
+    // };
 
     // Hook to run before each test case
     beforeEach(() => {
@@ -41,24 +42,24 @@ describe('Login Test Suite', () => {
     });
 
     it('Login with valid data', () => {
-        login(userData.email, userData.password);
+        utils.login(selectors, userData.email, userData.password);
     });
 
     context('Incorrect attempts', () => {
         it('Invalid email and password', () => {
-            login(userData.invalidEmail, userData.invalidPassword);
+            utils.login(selectors, userData.invalidEmail, userData.invalidPassword);
             cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
         });
         it('Empty Fields', () => {
-            login(' ', ' ');
+            utils.login(selectors, ' ', ' ');
             cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
         });
         it('Empty email', () => {
-            login(' ', userData.password);
+            utils.login(selectors, ' ', userData.password);
             cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
         });
         it('Empty password', () => {
-            login(userData.email, ' ');
+            utils.login(selectors, userData.email, ' ');
             cy.get(selectors.errorMessage).should('contain', userData.invalidCredentialsError);
         });
     })

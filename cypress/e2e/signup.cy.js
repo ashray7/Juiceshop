@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import * as utils from '../support/utils';
 
 describe('Signup Test Suite', () => {
 
@@ -6,7 +7,7 @@ describe('Signup Test Suite', () => {
 
     before(() => {
         cy.fixture('userData').then((data) => {
-            data.email = "ashraybaral13@gmail.com";
+            data.email = "ashraybaral100@gmail.com";
             // data.email = "ashraybaral" + Math.floor(Math.random() * 1000) + "@gmail.com";
             userData = data;  // Store the loaded data into userData
         });
@@ -36,21 +37,21 @@ describe('Signup Test Suite', () => {
     };
 
     // Reusable signup function
-    const signup = (email, password, securityAnswer) => {
-        cy.get(selectors.navbarAccount).click();
-        cy.get(selectors.navbarLoginButton).click();
-        cy.get(selectors.newCustomerLink).click();
+    // const signup = (email, password, securityAnswer) => {
+    //     cy.get(selectors.navbarAccount).click();
+    //     cy.get(selectors.navbarLoginButton).click();
+    //     cy.get(selectors.newCustomerLink).click();
 
-        cy.get(selectors.emailInput).type(email);
-        cy.get(selectors.passwordInput).type(password);
-        cy.get(selectors.repeatPasswordInput).type(password);
+    //     cy.get(selectors.emailInput).type(email);
+    //     cy.get(selectors.passwordInput).type(password);
+    //     cy.get(selectors.repeatPasswordInput).type(password);
 
-        cy.get(selectors.selectRoleDropdown).click();
-        cy.get(selectors.selectRoleOption).click();
+    //     cy.get(selectors.selectRoleDropdown).click();
+    //     cy.get(selectors.selectRoleOption).click();
 
-        cy.get(selectors.securityAnswerInput).type(securityAnswer);
-        // cy.get(selectors.registerButton).click();
-    };
+    //     cy.get(selectors.securityAnswerInput).type(securityAnswer);
+    //     // cy.get(selectors.registerButton).click();
+    // };
 
     beforeEach(() => {
         cy.visit(url);
@@ -64,7 +65,7 @@ describe('Signup Test Suite', () => {
     });
 
     it('Signup with valid data', () => {
-        signup(userData.email, userData.password, userData.securityAnswer);
+        utils.signup(selectors, userData.email, userData.password, userData.securityAnswer);
         cy.get(selectors.registerButton).click();
 
         // Verify successful registration message
@@ -77,25 +78,25 @@ describe('Signup Test Suite', () => {
 
     context('Invalid attempts', () => {
         it('Shows error message for invalid email', () => {
-            signup(userData.invalidEmail, userData.password, userData.securityAnswer);
+            utils.signup(selectors, userData.invalidEmail, userData.password, userData.securityAnswer);
     
             // Verify error message for invalid email
             cy.get(selectors.errorMessage).should('contain', userData.invalidEmailErrorMessage);
         });
         it('Empty email and password', () => {
-            signup(" ", " ", userData.securityAnswer);
+            utils.signup(selectors, " ", " ", userData.securityAnswer);
     
             // Verify error message for invalid email
             cy.get(selectors.errorMessage).should('contain', userData.invalidEmailErrorMessage);
         });
         it('Weak password', () => {
-            signup(userData.email, userData.weakPassword, userData.securityAnswer);
+            utils.signup(selectors, userData.email, userData.weakPassword, userData.securityAnswer);
     
             // Verify error message for weak password
             cy.get(selectors.weakPasswordErrorMessage).should('contain', userData.weakPasswordErrorMessage);
         });
         it('Shows duplicate email error', () => {
-            signup(userData.email, userData.password, userData.securityAnswer);
+            utils.signup(selectors, userData.email, userData.password, userData.securityAnswer);
             cy.get(selectors.registerButton).click();
     
             // Verify error message for email not unique
