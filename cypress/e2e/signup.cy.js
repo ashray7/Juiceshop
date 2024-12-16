@@ -13,7 +13,6 @@ describe('Signup Test Suite', () => {
         });
     });
 
-    // Define reusable variables
     const url = 'https://juice-shop.herokuapp.com/#/';
     // const url = 'https://juice-shop.herokuapp.com/#/register';
     //https://juice-shop.herokuapp.com/#/register
